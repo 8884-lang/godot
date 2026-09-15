@@ -1,0 +1,7 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://7ab0bt447cvg"]
+
+[ext_resource type="Texture2D" uid="uid://cpif3o3k8yg6p" path="res://resources/ui/精灵-0012.png" id="1_psypt"]
+
+[resource]
+texture = ExtResource("1_psypt")
+modulate_color = Color(1, 1, 1, 0.34117648)

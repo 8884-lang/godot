@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://c5st4ahpy128v"]
+
+[ext_resource type="Script" uid="uid://k6bfjosr3844" path="res://对话框/对话框代码/dialogue_manager.gd" id="1_3wjxu"]
+[ext_resource type="Resource" uid="uid://cv3kwu0qow7yj" path="res://场景1/对话1.tres" id="2_8a5ut"]
+[ext_resource type="StyleBox" uid="uid://7ab0bt447cvg" path="res://对话框/my_dialog_box.tres" id="3_6er2w"]
+
+[node name="Control" type="Control" unique_id=2046189399 node_paths=PackedStringArray("character_name_text", "text_box", "left_avatar", "right_avatar")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_3wjxu")
+character_name_text = NodePath("HBoxContainer/Panel/MarginContainer/VBoxContainer/Name")
+text_box = NodePath("HBoxContainer/Panel/MarginContainer/VBoxContainer/Content")
+left_avatar = NodePath("HBoxContainer/LeftAvatar")
+right_avatar = NodePath("HBoxContainer/RightAvatar")
+main_dialogue = ExtResource("2_8a5ut")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1198072714]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.425
+anchor_top = 16.1
+anchor_right = 28.375002
+anchor_bottom = 16.1
+offset_top = -163.0
+offset_right = -0.00012207031
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="LeftAvatar" type="TextureRect" parent="HBoxContainer" unique_id=217118221]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="Panel" type="Panel" parent="HBoxContainer" unique_id=1228828315]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("3_6er2w")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Panel" unique_id=688468723]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel/MarginContainer" unique_id=1501519911]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=35061211]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "名字"
+
+[node name="Content" type="Label" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=202286645]
+modulate = Color(0.16206557, 0.1620656, 0.16206557, 1)
+custom_minimum_size = Vector2(1, 50)
+layout_mode = 2
+text = "内容"
+autowrap_mode = 3
+
+[node name="RightAvatar" type="TextureRect" parent="HBoxContainer" unique_id=1177753711]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+stretch_mode = 5
