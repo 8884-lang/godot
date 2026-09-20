@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://2y7f5y3j2bbm"]
+
+[ext_resource type="Shader" uid="uid://b2tlydd56g3q0" path="res://resources/特效/受伤/enemy.gdshader" id="1_12f2p"]
+[ext_resource type="Texture2D" uid="uid://v7lybm70blc3" path="res://resources/player/0.png" id="2_7ruy3"]
+[ext_resource type="Script" uid="uid://cqp5jfalvk1cf" path="res://敌人/enemy.gd" id="2_o755y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m6ve7"]
+shader = ExtResource("1_12f2p")
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ita4j"]
+size = Vector2(16, 16)
+
+[node name="enemy" type="CharacterBody2D" unique_id=1659631587 groups=["enemy"]]
+script = ExtResource("2_o755y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=681929458]
+position = Vector2(35, 22)
+shape = SubResource("RectangleShape2D_ita4j")
+
+[node name="0" type="Sprite2D" parent="." unique_id=237660964]
+material = SubResource("ShaderMaterial_m6ve7")
+position = Vector2(35, 22)
+texture = ExtResource("2_7ruy3")
