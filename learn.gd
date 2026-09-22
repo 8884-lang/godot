@@ -5,6 +5,7 @@ extends Node2D
 func _ready() -> void:
 	print("one1")
 	print("two")
+	print("two1")
 	pass # Replace with function body.
 
 
