@@ -19,10 +19,10 @@ func 开始时() -> void:
 	var atk: AnimatedSprite2D = _attack(角色)
 	var hitbox: Area2D = _hitbox(角色)
 
-	# 优先按键方向，否则用当前速度决定朝向
+	# 优先按键方向；没按左右时用「移动趋势朝向」（站着也能朝正确方向打）
 	var face: float = Input.get_axis("move_left", "move_right")
 	if is_zero_approx(face):
-		face = signf(角色.velocity.x) if not is_zero_approx(角色.velocity.x) else 1.0
+		face = PlayerState.取得趋势朝向(角色)
 	PlayerState.设置面向(角色, face)
 
 	atk.visible = true

@@ -7,9 +7,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7e2go"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ita4j"]
-size = Vector2(32, 32)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_ita4j"]
 animations = [{
 "frames": [{
@@ -22,18 +19,21 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_c17rm")
 }],
-"loop": false,
+"loop": 0,
 "name": &"attack",
 "speed": 15.0
 }, {
 "frames": [],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mwb8w"]
 size = Vector2(66, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ita4j"]
+size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
 size = Vector2(32, 32)
@@ -43,14 +43,14 @@ material = SubResource("ShaderMaterial_7e2go")
 scale = Vector2(0.5, 0.5)
 script = ExtResource("2_m6ve7")
 
-[node name="Visual" type="Node2D" parent="."]
+[node name="Visual" type="Node2D" parent="." unique_id=797001343]
 metadata/_edit_lock_ = true
 
-[node name="Body" type="Sprite2D" parent="Visual"]
+[node name="Body" type="Sprite2D" parent="Visual" unique_id=2075787046]
 texture = ExtResource("2_c17rm")
 metadata/_edit_lock_ = true
 
-[node name="AttackAnim" type="AnimatedSprite2D" parent="Visual"]
+[node name="AttackAnim" type="AnimatedSprite2D" parent="Visual" unique_id=1600037207]
 visible = false
 sprite_frames = SubResource("SpriteFrames_ita4j")
 animation = &"attack"
@@ -58,41 +58,40 @@ frame = 2
 frame_progress = 1.0
 metadata/_edit_lock_ = true
 
-[node name="HitBox" type="Area2D" parent="Visual/AttackAnim"]
+[node name="HitBox" type="Area2D" parent="Visual/AttackAnim" unique_id=1573337773]
 monitoring = false
 monitorable = false
+metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Visual/AttackAnim/HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visual/AttackAnim/HitBox" unique_id=1406910299]
 position = Vector2(49, 1)
 shape = SubResource("RectangleShape2D_mwb8w")
 
-[node name="TrailSprite" type="Sprite2D" parent="Visual"]
+[node name="TrailSprite" type="Sprite2D" parent="Visual" unique_id=1872310596]
 visible = false
 texture = ExtResource("2_c17rm")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1289315679]
 shape = SubResource("RectangleShape2D_ita4j")
 metadata/_edit_lock_ = true
 
-[node name="RayCastLeft" type="RayCast2D" parent="."]
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1731934186]
 target_position = Vector2(-17, 0)
 metadata/_edit_lock_ = true
 
-[node name="RayCastRight" type="RayCast2D" parent="."]
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=1606239996]
 target_position = Vector2(17, 0)
 metadata/_edit_lock_ = true
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="." unique_id=512680355]
 collision_layer = 0
-collision_mask = 1
-monitorable = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=933196841]
 shape = SubResource("RectangleShape2D_hurt")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=828910544]
 zoom = Vector2(2, 2)
 metadata/_edit_lock_ = true
 
-[node name="状态机" type="Node" parent="."]
+[node name="状态机" type="Node" parent="." unique_id=1974041439]

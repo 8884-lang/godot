@@ -29,7 +29,9 @@ const 移动路径 := "res://玩家Player1/states/移动.gd"
 @export var max_hp: int = 3 ## 最大生命（检查器可调）
 
 var hp: int = 3 ## 当前生命
-var facing: int = 1 ## 朝向：1=右，-1=左
+## 移动趋势朝向：最后一次左右移动的方向（1=右，-1=左）。
+## 站着不动时，冲刺/攻击默认用这个方向，而不是强制向右。
+var 趋势朝向: int = 1
 var 无敌: bool = false ## true 时忽略新的受击
 
 # ----- 节点引用：状态里用 角色.xxx，少写长路径字符串 -----

@@ -163,9 +163,10 @@ func _处理冲刺(角色: CharacterBody2D, delta: float, direction: float) -> v
 		and dash_cooldown_timer <= 0.0
 		and not is_dashing
 	):
+		# 有按左右 → 按输入；没按 → 用移动后的趋势朝向
 		var dash_dir: float = direction
 		if is_zero_approx(dash_dir):
-			dash_dir = signf(角色.velocity.x) if not is_zero_approx(角色.velocity.x) else 1.0
+			dash_dir = PlayerState.取得趋势朝向(角色)
 		dash_direction = 1 if dash_dir >= 0.0 else -1
 		is_dashing = true
 		dash_timer = dash_duration
