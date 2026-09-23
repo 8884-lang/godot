@@ -49,6 +49,10 @@ func 开始时() -> void:
 	pass
 
 
+func 结束时() -> void:
+	is_dashing = false
+
+
 func _角色() -> CharacterBody2D:
 	var n: Node = get_parent()
 	while n != null and not (n is CharacterBody2D):
@@ -61,6 +65,8 @@ func _physics_process(delta: float) -> void:
 	if 角色 == null:
 		return
 	var direction: float = Input.get_axis("move_left", "move_right")
+	if direction != 0.0:
+		PlayerState.设置面向(角色, direction)
 
 	if 允许切入攻击 and Input.is_action_just_pressed("attack"):
 		角色.状态改变(load(攻击路径))
@@ -76,15 +82,21 @@ func _physics_process(delta: float) -> void:
 
 
 func _ray_left(角色: CharacterBody2D) -> RayCast2D:
+	if "ray_left" in 角色:
+		return 角色.ray_left as RayCast2D
 	return 角色.get_node("RayCastLeft") as RayCast2D
 
 
 func _ray_right(角色: CharacterBody2D) -> RayCast2D:
+	if "ray_right" in 角色:
+		return 角色.ray_right as RayCast2D
 	return 角色.get_node("RayCastRight") as RayCast2D
 
 
 func _trail(角色: CharacterBody2D) -> Sprite2D:
-	return 角色.get_node("TrailSprite") as Sprite2D
+	if "trail_sprite" in 角色:
+		return 角色.trail_sprite as Sprite2D
+	return 角色.get_node_or_null("Visual/TrailSprite") as Sprite2D
 
 
 func _更新计时(角色: CharacterBody2D, delta: float, direction: float) -> void:

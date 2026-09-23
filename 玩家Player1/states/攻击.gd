@@ -11,15 +11,12 @@ func 开始时() -> void:
 	_已命中.clear()
 	var 角色: CharacterBody2D = get_parent()
 	var atk: AnimatedSprite2D = _attack(角色)
-	var body: Sprite2D = _body(角色)
 	var hitbox: Area2D = _hitbox(角色)
 
 	var face: float = Input.get_axis("move_left", "move_right")
 	if is_zero_approx(face):
 		face = signf(角色.velocity.x) if not is_zero_approx(角色.velocity.x) else 1.0
-	var sx: float = 1.0 if face >= 0.0 else -1.0
-	atk.scale.x = absf(atk.scale.x) * sx
-	body.scale.x = absf(body.scale.x) * sx
+	PlayerState.设置面向(角色, face)
 
 	atk.visible = true
 	atk.play("attack")
@@ -32,6 +29,23 @@ func 开始时() -> void:
 		atk.animation_finished.connect(_攻击结束)
 
 	_启用移动()
+
+
+func 结束时() -> void:
+	var 角色: CharacterBody2D = get_parent()
+	var atk: AnimatedSprite2D = _attack(角色)
+	var hitbox: Area2D = _hitbox(角色)
+	if atk != null and atk.animation_finished.is_connected(_攻击结束):
+		atk.animation_finished.disconnect(_攻击结束)
+	if hitbox != null:
+		if hitbox.body_entered.is_connected(_命中身体):
+			hitbox.body_entered.disconnect(_命中身体)
+		hitbox.monitoring = false
+	if atk != null:
+		atk.stop()
+		atk.visible = false
+	_停用移动()
+	_已命中.clear()
 
 
 func _启用移动() -> void:
@@ -49,12 +63,16 @@ func _启用移动() -> void:
 func _停用移动() -> void:
 	var 旧: Node = get_node_or_null(移动节点名)
 	if 旧 != null:
+		if 旧.has_method("结束时"):
+			旧.结束时()
 		remove_child(旧)
 		旧.free()
 
 
 func _扫描重叠() -> void:
 	var hitbox: Area2D = _hitbox(get_parent())
+	if hitbox == null:
+		return
 	for body in hitbox.get_overlapping_bodies():
 		_命中身体(body)
 
@@ -74,31 +92,17 @@ func _命中身体(body: Node) -> void:
 
 
 func _攻击结束() -> void:
-	var 角色: CharacterBody2D = get_parent()
-	var atk: AnimatedSprite2D = _attack(角色)
-	var hitbox: Area2D = _hitbox(角色)
-
-	if atk.animation_finished.is_connected(_攻击结束):
-		atk.animation_finished.disconnect(_攻击结束)
-	if hitbox.body_entered.is_connected(_命中身体):
-		hitbox.body_entered.disconnect(_命中身体)
-
-	hitbox.monitoring = false
-	atk.stop()
-	atk.visible = false
-	_已命中.clear()
-	_停用移动()
-
-	角色.状态改变(load(移动路径))
+	# 清理交给 状态改变() 里的 结束时()，避免重复断开信号
+	get_parent().状态改变(load(移动路径))
 
 
 func _attack(角色: CharacterBody2D) -> AnimatedSprite2D:
-	return 角色.get_node("attack") as AnimatedSprite2D
+	if "attack_anim" in 角色:
+		return 角色.attack_anim as AnimatedSprite2D
+	return 角色.get_node("Visual/AttackAnim") as AnimatedSprite2D
 
 
 func _hitbox(角色: CharacterBody2D) -> Area2D:
-	return 角色.get_node("attack/HitBox") as Area2D
-
-
-func _body(角色: CharacterBody2D) -> Sprite2D:
-	return 角色.get_node("5") as Sprite2D
+	if "hit_box" in 角色:
+		return 角色.hit_box as Area2D
+	return 角色.get_node("Visual/AttackAnim/HitBox") as Area2D
