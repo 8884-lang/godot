@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://v7lybm70blc3" path="res://resources/player/0.png" id="2_7ruy3"]
 [ext_resource type="Script" uid="uid://cqp5jfalvk1cf" path="res://敌人/enemy.gd" id="2_o755y"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ita4j"]
+size = Vector2(16, 16)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m6ve7"]
 shader = ExtResource("1_12f2p")
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 shader_parameter/flash_amount = 0.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ita4j"]
-size = Vector2(16, 16)
 
 [node name="enemy" type="CharacterBody2D" unique_id=1659631587 groups=["enemy"]]
 script = ExtResource("2_o755y")
