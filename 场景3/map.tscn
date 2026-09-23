@@ -53,6 +53,15 @@ texture = ExtResource("1_q0i52")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_k3qxq")
 
+[sub_resource type="Gradient" id="Gradient_tqllf"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ita4j"]
+gradient = SubResource("Gradient_tqllf")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
 [node name="Map" type="Node2D" unique_id=1462391688]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=821567530]
@@ -60,7 +69,15 @@ tile_map_data = PackedByteArray("AAAFABAAAAAEAAEAAAAFABEAAAAEAAEAAAAFABIAAAAEAAE
 tile_set = SubResource("TileSet_ita4j")
 
 [node name="CharacterBody2D" parent="." unique_id=1704822092 instance=ExtResource("2_tqllf")]
-position = Vector2(111, 235)
+position = Vector2(943, -66)
+
+[node name="PointLight2D" type="PointLight2D" parent="CharacterBody2D" unique_id=492521111]
+position = Vector2(0, 1.9999962)
+scale = Vector2(2.40625, 2.53125)
+texture = SubResource("GradientTexture2D_ita4j")
 
 [node name="enemy" parent="." unique_id=1659631587 instance=ExtResource("3_tqllf")]
 position = Vector2(813, -88)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=661531635]
+color = Color(0.13077214, 0.13077214, 0.13077211, 1)
