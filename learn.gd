@@ -3,9 +3,10 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("one1111")
+	print("one1")
 	print("two2222")
 	print("two1000")
+	print("zzzz")
 	pass # Replace with function body.
 
 
